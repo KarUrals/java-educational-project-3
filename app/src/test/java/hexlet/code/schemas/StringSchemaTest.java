@@ -22,7 +22,7 @@ class StringSchemaTest {
         assertTrue(schema.isValid("hexlet"));
         assertFalse(schema.isValid(null));
         assertFalse(schema.isValid(5));
-        assertFalse(schema.isValid(" "));
+        assertFalse(schema.isValid(""));
 
         assertFalse(schema.minLength(7).isValid("hexlet"));
         assertTrue(schema.contains("wh").isValid("what does the fox say"));
