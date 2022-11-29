@@ -9,6 +9,7 @@ public class BaseSchema {
     protected final List<Predicate<Object>> validators = new ArrayList<>();
 
     public boolean isValid(Object object) {
-        return validators.stream().allMatch(check -> check.test(object));
+        return validators.stream()
+                .allMatch(check -> check.test(object));
     }
 }
