@@ -17,12 +17,12 @@ public class BaseSchema {
                 .allMatch(check -> check.test(object));
     }
 
-    protected final void addCheck(String name, Predicate<Object> object) {
-        this.validators.put(name, object);
-    }
-
-    protected BaseSchema required() {
+    public BaseSchema required() {
         isRequired = true;
         return this;
+    }
+
+    protected final void addCheck(String name, Predicate<Object> object) {
+        this.validators.put(name, object);
     }
 }
