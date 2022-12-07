@@ -18,7 +18,7 @@ public class BaseSchema {
     }
 
     /**
-     * Add validation that object not Null
+     * Add validation that object not Null.
      *
      * @return this Schema
      */
