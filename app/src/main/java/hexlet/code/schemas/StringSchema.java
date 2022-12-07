@@ -4,6 +4,11 @@ import java.util.function.Predicate;
 
 public final class StringSchema extends BaseSchema {
 
+    public StringSchema() {
+        Predicate<Object> isString = obj -> obj instanceof String;
+        addCheck("string", isString);
+    }
+
     public StringSchema minLength(int length) {
         Predicate<Object> minLength = str -> ((String) str).length() >= length;
         addCheck("minLength", minLength);
@@ -16,9 +21,11 @@ public final class StringSchema extends BaseSchema {
         return this;
     }
 
+    @Override
     public StringSchema required() {
-        Predicate<Object> required = str -> str instanceof String && !(((String) str).isEmpty());
-        addCheck("required", required);
+        super.required();
+        Predicate<Object> isNotEmpty = str -> !(((String) str).isEmpty());
+        addCheck("notEmpty", isNotEmpty);
         return this;
     }
 }

@@ -4,14 +4,13 @@ import java.util.function.Predicate;
 
 public final class NumberSchema extends BaseSchema {
 
-    public NumberSchema required() {
-        Predicate<Object> required = number -> number instanceof Integer;
-        addCheck("required", required);
-        return this;
+    public NumberSchema() {
+        Predicate<Object> isInteger = obj -> obj instanceof Integer;
+        addCheck("integer", isInteger);
     }
 
     public NumberSchema positive() {
-        Predicate<Object> positive = number -> number instanceof Integer && (Integer) number > 0 || number == null;
+        Predicate<Object> positive = number -> (Integer) number > 0;
         addCheck("positive", positive);
         return this;
     }
