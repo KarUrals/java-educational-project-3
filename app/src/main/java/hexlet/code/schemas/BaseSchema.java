@@ -17,6 +17,11 @@ public class BaseSchema {
                 .allMatch(check -> check.test(object));
     }
 
+    /**
+     * Add validation that object not Null
+     *
+     * @return this Schema
+     */
     public BaseSchema required() {
         isRequired = true;
         return this;
