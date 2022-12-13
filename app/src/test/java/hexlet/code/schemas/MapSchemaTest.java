@@ -11,34 +11,66 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MapSchemaTest {
-    private Validator v;
+    private static final String STRING_EXAMPLE = "java";
+    private static final int NUMBER_EXAMPLE = 96;
+    private static final int MAP_SIZE_2 = 2;
+    private final Validator v = new Validator();
     private MapSchema schema;
 
     @BeforeEach
     void prepareTests() {
-        v = new Validator();
         schema = v.map();
     }
 
     @Test
-    void mapSchemaTest() {
-
+    void testDifferentInputTypesWithoutRequired() {
         assertTrue(schema.isValid(null));
-
-        schema.required();
-
-        assertFalse(schema.isValid(null));
+        assertTrue(schema.isValid(NUMBER_EXAMPLE));
+        assertTrue(schema.isValid(STRING_EXAMPLE));
         assertTrue(schema.isValid(new HashMap()));
+    }
+
+    @Test
+    void testDifferentInputTypesWithRequired() {
+        schema.required();
+        assertFalse(schema.isValid(null));
+        assertFalse(schema.isValid(NUMBER_EXAMPLE));
+        assertFalse(schema.isValid(STRING_EXAMPLE));
+        assertTrue(schema.isValid(new HashMap()));
+    }
+
+    @Test
+    void testSizeOfWithoutRequired() {
+        schema.sizeof(MAP_SIZE_2);
 
         Map<String, String> data = new HashMap<>();
         data.put("key1", "value1");
-        assertTrue(schema.isValid(data));
-
-        schema.sizeof(2);
 
         assertFalse(schema.isValid(data));
         data.put("key2", "value2");
         assertTrue(schema.isValid(data));
+        data.put("key3", "value3");
+        assertFalse(schema.isValid(data));
+        assertTrue(schema.isValid(null));
+        assertTrue(schema.isValid(NUMBER_EXAMPLE));
+        assertTrue(schema.isValid(STRING_EXAMPLE));
+    }
+
+    @Test
+    void testSizeOfWithRequired() {
+        schema.sizeof(MAP_SIZE_2).required();
+
+        Map<String, String> data = new HashMap<>();
+        data.put("key1", "value1");
+
+        assertFalse(schema.isValid(data));
+        data.put("key2", "value2");
+        assertTrue(schema.isValid(data));
+        data.put("key3", "value3");
+        assertFalse(schema.isValid(data));
+        assertFalse(schema.isValid(null));
+        assertFalse(schema.isValid(NUMBER_EXAMPLE));
+        assertFalse(schema.isValid(STRING_EXAMPLE));
     }
 
     @Test

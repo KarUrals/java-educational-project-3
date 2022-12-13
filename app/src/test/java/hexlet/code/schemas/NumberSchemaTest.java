@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class NumberSchemaTest {
-    private static final String STRING_EXAMPLE = "random string";
+    private static final String STRING_EXAMPLE = "message";
     private static final int POSITIVE_NUMBER_EXAMPLE = 2;
     private static final int NEGATIVE_NUMBER_EXAMPLE = -5;
     private static final int ZERO_NUMBER_EXAMPLE = 0;
