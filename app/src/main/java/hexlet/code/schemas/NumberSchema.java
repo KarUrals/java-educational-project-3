@@ -6,7 +6,7 @@ public final class NumberSchema extends BaseSchema {
 
     public NumberSchema() {
         Predicate<Object> isInteger = obj -> obj instanceof Integer;
-        addCheck("integer", isInteger);
+        addCheck("required", isInteger);
     }
 
     public NumberSchema positive() {

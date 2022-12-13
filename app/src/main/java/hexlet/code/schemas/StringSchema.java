@@ -6,7 +6,7 @@ public final class StringSchema extends BaseSchema {
 
     public StringSchema() {
         Predicate<Object> isString = obj -> obj instanceof String;
-        addCheck("string", isString);
+        addCheck("required", isString);
     }
 
     public StringSchema minLength(int length) {

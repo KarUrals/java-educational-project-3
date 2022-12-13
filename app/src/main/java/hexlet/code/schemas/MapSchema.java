@@ -7,7 +7,7 @@ public final class MapSchema extends BaseSchema {
 
     public MapSchema() {
         Predicate<Object> isMap = obj -> obj instanceof Map;
-        addCheck("map", isMap);
+        addCheck("required", isMap);
     }
 
     public MapSchema sizeof(int size) {
