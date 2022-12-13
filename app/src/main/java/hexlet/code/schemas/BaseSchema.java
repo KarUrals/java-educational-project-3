@@ -9,8 +9,19 @@ public class BaseSchema {
     private final Map<String, Predicate<Object>> validators = new HashMap<>();
 
     public final boolean isValid(Object object) {
+        Predicate<Object> requiredCheck = validators.get("required");
+        if (!isRequired) {
+            if (!requiredCheck.test(object)) {
+                return true;
+            }
+        }
+
         if (object == null) {
             return !isRequired;
+        }
+
+        if (!requiredCheck.test(object)) {
+            return false;
         }
 
         return validators.values().stream()
