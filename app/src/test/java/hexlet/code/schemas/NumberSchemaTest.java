@@ -23,6 +23,7 @@ class NumberSchemaTest {
     void beforeEach() {
         schema = v.number();
     }
+
     @Test
     void testDifferentInputTypesWithoutRequired() {
         assertTrue(schema.isValid(null));
